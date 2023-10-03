@@ -1,0 +1,41 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: API-GATEWAY
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8090/realms/microservice-realm
+
+  cloud:
+    gateway:
+      routes:
+        - id: CUSTOMER-SERVICE
+          uri: lb://CUSTOMER-SERVICE
+          predicates:
+           - Path=/api/v1/customers/**
+
+        - id: TRAVEL-SERVICE
+          uri: lb://TRAVEL-SERVICE
+          predicates:
+            - Path=/api/v1/travel/**
+
+        - id: TAXI-SERVICE
+          uri: lb://TAXI-SERVICE
+          predicates:
+            - Path=/api/v1/taxi/**
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+
+management:
+  tracing.sampling.probability: 1.0

@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  # PostgreSQL Database Container
+  postgres:
+    image: postgres:latest
+    container_name: customer-service-db
+    environment:
+      POSTGRES_DB: customer
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"

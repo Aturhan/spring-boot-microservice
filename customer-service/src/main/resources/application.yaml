@@ -1,0 +1,30 @@
+# Application Name Configuration
+spring:
+  application:
+    name: customer-service
+
+# PostgreSQL Database Connection Configuration
+
+  datasource:
+    url: jdbc:postgresql://postgres:5432/customer
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+server:
+  port: 8083
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka
+
+management:
+  tracing.sampling.probability: 1.0
